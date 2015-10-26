@@ -1,0 +1,32 @@
+name: NepianEXP
+main: nepian.bukkit.plugin.exp.Main
+version: 1.0
+author: Nepian
+depend:
+- Vault
+commands:
+  exp:
+    aliases:
+    - nexp
+permissions:
+  nepian.exp.public:
+    default: true
+    children:
+      nepian.exp: true
+      nepian.exp.info: true
+      nepian.exp.buy: true
+      nepian.exp.sell: true
+
+  nepian.exp.config.*:
+    children:
+      nepian.exp.config: true
+      nepian.exp.config.reload: true
+
+  nepian.exp.op:
+    default: op
+    children:
+      nepian.exp.public: true
+      nepian.exp.reload: true
+      nepian.exp.add: true
+      nepian.exp.reset: true
+      nepian.exp.config.*: true

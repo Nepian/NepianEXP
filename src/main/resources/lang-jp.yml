@@ -1,0 +1,48 @@
+#################################################################
+# lang-jp.yml の文字コードは Shift_JIS を使用(日本語表記のため)
+#################################################################
+
+# 経験値が変更された場合に表示されるメッセージ
+exp-change: "&a&l{oldExp}&r (lvl: &2{oldLevel}&r) ⇒ &a&l{newExp}&r (lvl: &2{newLevel}&r)"
+
+# exp info コマンドのメッセージ
+exp-info-totalexp: "経験値総量... &a&l{totalExp}&r (lvl: &2{level}&r)"
+exp-info-next: "次のレベルまであと... &d&l{next}&r"
+
+# exp reset コマンドのメッセージ
+exp-reset: "&b経験値をリセットしました&r"
+
+# exp add コマンドのメッセージ
+exp-add: "経験値を &d&l{amount}&r 追加しました"
+exp-add-description: "&4追加する経験値を入力してください&r"
+exp-add-example: "例: /{label} add &d&l15&r"
+
+# exp buy コマンドのメッセージ
+exp-buy: "経験値を &d&l{amount}&r 購入しました"
+exp-buy-description: "&4購入する経験値を入力してください&r"
+exp-buy-example: "例: /{label} buy &d&l15&r"
+
+# exp sell コマンドのメッセージ
+exp-sell: "経験値を &d&l{amount}&r 売却しました"
+exp-sell-description: "&4売却する経験値を入力してください&r"
+exp-sell-example: "例: /{label} sell &d&l15&r"
+
+# exp config reload コマンドのメッセージ
+exp-config-reload-message: "&bコンフィグをリロードしました&r"
+exp-config-reload-log: "&bコンフィグがリロードされました&r"
+
+# exp reload コマンドのメッセージ
+exp-reload: "&dプラグインをリロードしました&r"
+
+# exp コマンドのメッセージ
+exp-version: "&d{name} v{version}.&r"
+
+# エラーメッセージ
+error-command: "&4コマンドが間違っています&r"
+error-player-command: "&4このコマンドはプレイヤーしか利用できません&r"
+error-command-no-permission: "&4{command}を実行するための権限がありません&r"
+error-economy-fault: "&4エラーが発生しました: &7{error}&r"
+error-not-valid-number: "&4数値を入力してください&r"
+error-number-not-positive: "&41以上の数値を入力してください&r"
+error-not-enough-money: "&4所持金が不足しています&r"
+error-not-enough-exp: "&4経験値が不足しています&r"
