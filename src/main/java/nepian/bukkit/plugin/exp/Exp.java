@@ -1,12 +1,5 @@
 package nepian.bukkit.plugin.exp;
 
-import nepian.bukkit.plugin.exp.commands.Add;
-import nepian.bukkit.plugin.exp.commands.Buy;
-import nepian.bukkit.plugin.exp.commands.Config;
-import nepian.bukkit.plugin.exp.commands.Info;
-import nepian.bukkit.plugin.exp.commands.Reload;
-import nepian.bukkit.plugin.exp.commands.Reset;
-import nepian.bukkit.plugin.exp.commands.Sell;
 import nepian.bukkit.plugin.exp.configration.Lang;
 import nepian.bukkit.plugin.exp.configration.Permissions;
 
@@ -40,13 +33,11 @@ public class Exp implements CommandExecutor {
 
 		if (args.length >= 1) {
 			String expAction = args[0];
-			if (expAction.equalsIgnoreCase("info"))   { Info.useCommand(sender, label, args); return true; }
-			if (expAction.equalsIgnoreCase("add"))    { Add.useCommand(sender, label, args); return true; }
-			if (expAction.equalsIgnoreCase("reset"))  { Reset.useCommand(sender, label, args); return true; }
-			if (expAction.equalsIgnoreCase("buy"))    { Buy.useCommand(sender, label, args); return true; }
-			if (expAction.equalsIgnoreCase("reload")) { Reload.useCommand(sender, label, args); return true; }
-			if (expAction.equalsIgnoreCase("sell"))   { Sell.useCommand(sender, label, args); return true; }
-			if (expAction.equalsIgnoreCase("config")) { Config.useCommand(sender, label, args); return true; }
+			Commands com = Commands.getCommand(expAction);
+			if (com != null) {
+				com.useCommand(sender, label, args);
+				return true;
+			}
 		}
 
 		String msg = Lang.EXP_VERSION.get()
