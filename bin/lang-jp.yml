@@ -10,7 +10,8 @@ exp-info-totalexp: "経験値総量... &a&l{totalExp}&r (lvl: &2{level}&r)"
 exp-info-next: "次のレベルまであと... &d&l{next}&r"
 
 # exp reset コマンドのメッセージ
-exp-reset: "&b経験値をリセットしました&r"
+exp-reset-target-message: "&b{sender} によって経験値をリセットされました&r"
+exp-reset-sender-message: "&b{target} の経験値をリセットしました&r"
 
 # exp add コマンドのメッセージ
 exp-add: "経験値を &d&l{amount}&r 追加しました"
@@ -46,3 +47,4 @@ error-not-valid-number: "&4数値を入力してください&r"
 error-number-not-positive: "&41以上の数値を入力してください&r"
 error-not-enough-money: "&4所持金が不足しています&r"
 error-not-enough-exp: "&4経験値が不足しています&r"
+error-not-online-player: "&4指定したプレイヤーは存在しません&r"
