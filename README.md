@@ -16,6 +16,6 @@
 
 ## LINK
 * [NepianEXP Wiki](/Nepian/NepianEXP/wiki)
-* [Commands and Permission](/Nepian/NepianEXP/commands)
-* [All Permissions](/Nepian/NepianEXP/Permissions)
+* [Commands and Permission](/Nepian/NepianEXP/wiki/commands)
+* [All Permissions](/Nepian/NepianEXP/wiki/Permissions)
 * [Japanese MC Forum](http://forum.minecraftuser.jp/viewtopic.php?f=38&t=28875)
