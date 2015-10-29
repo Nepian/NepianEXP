@@ -65,6 +65,14 @@ public class ExpAddPlayer extends ExpCommand {
 					.replace("{oldLevel}", oldLevel.toString())
 					.replace("{newExp}", newExp.toString())
 					.replace("{newLevel}", newLevel.toString()));
+			plugin.sendMessage(player, Lang.EXP_ADD_TARGET.get()
+					.replace("{player}", sender.getName())
+					.replace("{amount}", changeAmount.toString()));
+			plugin.sendMessage(player, Lang.EXP_CHANGE.get()
+					.replace("{oldExp}", oldExp.toString())
+					.replace("{oldLevel}", oldLevel.toString())
+					.replace("{newExp}", newExp.toString())
+					.replace("{newLevel}", newLevel.toString()));
 		}
 
 		return true;
