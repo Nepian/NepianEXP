@@ -1,5 +1,7 @@
 package nepian.bukkit.plugin.exp;
 
+import nepian.bukkit.plugin.exp.commands.player.PlayerManager;
+import nepian.bukkit.plugin.exp.configration.Logger;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.ChatColor;
@@ -10,6 +12,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
 	private static Main instance;
 	private Economy economy = null;
+	private PlayerManager playerMan;
+	private Exp exp;
 
 	public static Main getInstance() {
 		return instance;
@@ -26,7 +30,8 @@ public class Main extends JavaPlugin {
 			return;
 		}
 
-		getCommand("exp").setExecutor(new Exp(this));
+		playerMan = new PlayerManager(this);
+		getCommand("exp").setExecutor(exp = new Exp(this));
 
 		Logger.log("&d" + getName() + " v" + getDescription().getVersion() + " enabled!");
 	}
@@ -51,5 +56,13 @@ public class Main extends JavaPlugin {
 
 	public Economy getEconomy() {
 		return economy;
+	}
+
+	public PlayerManager getPlayerMan() {
+		return playerMan;
+	}
+
+	public Exp getExp() {
+		return exp;
 	}
 }

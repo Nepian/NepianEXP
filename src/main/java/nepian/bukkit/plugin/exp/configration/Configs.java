@@ -47,9 +47,11 @@ public enum Configs {
 
 	public static ArrayList<String> getAllParam() {
 		ArrayList<String> params = new ArrayList<String>();
-		for (Configs param : values()) {
-			String key = param.getKey();
-			params.add("&e" + key + "&r : &c" + param.getString());
+		for (Configs value : values()) {
+			String key = value.getKey();
+			params.add(Lang.EXP_CONFIG_KEY_AND_VALUE.get()
+					.replace("{key}", key)
+					.replace("{value}", value.getString()));
 		}
 		return params;
 	}

@@ -2,7 +2,6 @@ package nepian.bukkit.plugin.exp.configration;
 
 import java.io.File;
 
-import nepian.bukkit.plugin.exp.Logger;
 import nepian.bukkit.plugin.exp.Main;
 
 import org.bukkit.ChatColor;
@@ -11,6 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public enum Lang {
 	ERROR_COMMAND,
+	ERROR_COMMAND_USAGE,
 	ERROR_PLAYER_COMMAND,
 	ERROR_COMMAND_NO_PERMISSION,
 	ERROR_ECONOMY_FAULT,
@@ -21,23 +21,22 @@ public enum Lang {
 	ERROR_NOT_ONLINE_PLAYER,
 
 	EXP_CHANGE,
+	EXP_HELP,
+
+	EXP_INFO,
 	EXP_INFO_TOTALEXP,
 	EXP_INFO_NEXT,
+
+	EXP_BUY,
+
+	EXP_SELL,
+
+	EXP_ADD,
+
 	EXP_RESET_TARGET_MESSAGE,
 	EXP_RESET_SENDER_MESSAGE,
 
-	EXP_ADD,
-	EXP_ADD_DESCRIPTION,
-	EXP_ADD_EXAMPLE,
-
-	EXP_BUY,
-	EXP_BUY_DESCRIPTION,
-	EXP_BUY_EXAMPLE,
-
-	EXP_SELL,
-	EXP_SELL_DESCRIPTION,
-	EXP_SELL_EXAMPLE,
-
+	EXP_CONFIG_KEY_AND_VALUE,
 	EXP_CONFIG_RELOAD_MESSAGE,
 	EXP_CONFIG_RELOAD_LOG,
 

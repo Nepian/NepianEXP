@@ -1,8 +1,8 @@
-package nepian.bukkit.plugin.exp;
+package nepian.bukkit.plugin.exp.configration;
 
 import java.util.logging.Level;
 
-import nepian.bukkit.plugin.exp.configration.Configs;
+import nepian.bukkit.plugin.exp.Main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

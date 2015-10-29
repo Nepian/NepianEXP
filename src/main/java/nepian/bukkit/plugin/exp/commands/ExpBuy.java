@@ -1,26 +1,32 @@
 package nepian.bukkit.plugin.exp.commands;
 
+import nepian.bukkit.plugin.exp.ExpCommand;
 import nepian.bukkit.plugin.exp.ExpManager;
 import nepian.bukkit.plugin.exp.Main;
 import nepian.bukkit.plugin.exp.configration.Configs;
 import nepian.bukkit.plugin.exp.configration.Lang;
-import nepian.bukkit.plugin.exp.configration.Permissions;
 import net.milkbowl.vault.economy.EconomyResponse;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Buy {
-	private static final Main plugin = Main.getInstance();
+public class ExpBuy extends ExpCommand {
+	private static final String name = "buy";
+	private static final String usage = "buy { <exp> or <level>L }";
+	private static final String permission = "nepian.exp.buy";
+	private static final String description = "åoå±ílÇçwì¸Ç∑ÇÈ";
 
-	public static void useCommand(CommandSender sender, String label, String[] args) {
-		if (!Permissions.BUY.hasPermission(sender, label, args)) return;
+	private final Main plugin;
 
-		if (args.length < 2) {
-			plugin.sendMessage(sender, Lang.EXP_BUY_DESCRIPTION.get());
-			plugin.sendMessage(sender, Lang.EXP_BUY_EXAMPLE.get().replace("{label}", label));
-			return;
-		}
+	public ExpBuy(Main instance) {
+		super(name, usage, permission, description);
+		this.plugin = instance;
+	}
+
+	@Override
+	public boolean useCommand(CommandSender sender, String label, String[] args) {
+		if (!plugin.getExp().checkPermission(sender, permission, label, usage)) return true;
+		if (!plugin.getExp().checkEqualArgsLength(2, args, sender, label, usage)) return true;
 
 		Player player = (Player) sender;
 		Integer buyAmount = 0;
@@ -35,20 +41,20 @@ public class Buy {
 				buyAmount = Integer.valueOf(args[1]);
 			} catch (NumberFormatException e) {
 				plugin.sendMessage(sender, Lang.ERROR_NOT_VALID_NUMBER.get());
-				return;
+				return true;
 			}
 		}
 
 		if (buyAmount <= 0) {
 			plugin.sendMessage(sender, Lang.ERROR_NUMBER_NOT_POSITIVE.get());
-			return;
+			return true;
 		}
 
 		int money = (int) Math.floor(buyAmount * Configs.EXP_BUY_RATE.getDouble());
 
 		if (money > plugin.getEconomy().getBalance(player)) {
 			plugin.sendMessage(sender, Lang.ERROR_NOT_ENOUGH_MONEY.get());
-			return;
+			return true;
 		}
 
 		EconomyResponse response = plugin.getEconomy().withdrawPlayer(player, money);
@@ -56,7 +62,7 @@ public class Buy {
 			String msg = Lang.ERROR_ECONOMY_FAULT.get()
 					.replace("{error}", response.errorMessage);
 			plugin.sendMessage(sender, msg);
-			return;
+			return true;
 		}
 
 		Integer oldLevel = ExpManager.getLevel(player);
@@ -67,15 +73,14 @@ public class Buy {
 		Integer newLevel = ExpManager.getLevel(player);
 		Integer newExp = ExpManager.getTotalExp(player);
 
-		String msg = Lang.EXP_BUY.get()
-				.replace("{amount}", buyAmount.toString());
-		String msg2 = Lang.EXP_CHANGE.get()
+		plugin.sendMessage(sender, Lang.EXP_BUY.get()
+				.replace("{amount}", buyAmount.toString()));
+		plugin.sendMessage(sender, Lang.EXP_CHANGE.get()
 				.replace("{oldExp}", oldExp.toString())
 				.replace("{oldLevel}", oldLevel.toString())
 				.replace("{newExp}", newExp.toString())
-				.replace("{newLevel}", newLevel.toString());
+				.replace("{newLevel}", newLevel.toString()));
 
-		plugin.sendMessage(sender, msg);
-		plugin.sendMessage(sender, msg2);
+		return true;
 	}
 }
