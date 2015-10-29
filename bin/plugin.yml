@@ -13,6 +13,7 @@ permissions:
     default: true
     children:
       nepian.exp: true
+      nepian.exp.help: true
       nepian.exp.info: true
       nepian.exp.buy: true
       nepian.exp.sell: true
@@ -26,7 +27,9 @@ permissions:
     default: op
     children:
       nepian.exp.public: true
+      nepian.exp.info.player: true
       nepian.exp.reload: true
       nepian.exp.add: true
+      nepian.exp.add.player: true
       nepian.exp.reset: true
       nepian.exp.config.*: true
