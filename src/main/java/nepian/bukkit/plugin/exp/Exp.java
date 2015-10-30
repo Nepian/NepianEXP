@@ -36,14 +36,16 @@ public class Exp implements CommandExecutor {
 		this.commands = new ArrayList<ExpCommand>();
 		this.commands.add(new ExpHelp(plugin));
 		this.commands.add(new ExpInfo(plugin));
-		this.commands.add(new ExpBuy(plugin));
-		this.commands.add(new ExpSell(plugin));
 		this.commands.add(new ExpSend(plugin));
 		this.commands.add(new ExpAdd(plugin));
 		this.commands.add(new ExpSet(plugin));
 		this.commands.add(new ExpReset(plugin));
 		this.commands.add(new ExpReload(plugin));
 		this.commands.add(new ExpConfig(plugin));
+		if (plugin.getEconomy() != null) {
+			this.commands.add(new ExpBuy(plugin));
+			this.commands.add(new ExpSell(plugin));
+		}
 	}
 
 	@Override

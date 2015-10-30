@@ -20,8 +20,8 @@ exp-buy: "経験値を &d&l{amount}&r 購入しました"
 exp-sell: "経験値を &d&l{amount}&r 売却しました"
 
 # Send
-exp-send-sender: "経験値を {player} に {amount} 渡しました"
-exp-send-target: "経験値を {player} から {amount} 受け取りました"
+exp-send-sender: "経験値を &6{player}&r に &d&l{amount}&r 渡しました"
+exp-send-target: "経験値を &6{player}&r から &d&l{amount}&r 受け取りました"
 
 # Add
 exp-add: "経験値を &6{player}&r に &d&l{amount}&r 追加しました"

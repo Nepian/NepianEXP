@@ -29,9 +29,9 @@ public class Main extends JavaPlugin {
 		saveDefaultConfig();
 
 		if (!setupEconomy()) {
-			Logger.log("&4Disabled due to no Vault dependency found!");
-			getServer().getPluginManager().disablePlugin(this);
-			return;
+			Logger.log("&4Vault依存関係プラグインが見つかりません");
+			//getServer().getPluginManager().disablePlugin(this);
+			//return;
 		}
 
 		playerMan = new PlayerManager(this);
@@ -41,7 +41,7 @@ public class Main extends JavaPlugin {
 			Metrics metrics = new Metrics(this);
 			metrics.start();
 		} catch (IOException e) {
-			Logger.log("&4Failed to start Metrics: &e" + e.getMessage());
+			Logger.log("&4Metricsをスタートできませんでした: &e" + e.getMessage());
 		}
 
 		Logger.log("&d" + getName() + " v" + getDescription().getVersion() + " enabled!");
