@@ -19,20 +19,37 @@ permissions:
       nepian.exp.sell: true
       nepian.exp.send: true
 
+  nepian.exp.op:
+    default: op
+    children:
+      nepian.exp.reload: true
+      nepian.exp.config.*: true
+      nepian.exp.info.*: true
+      nepian.exp.add.*: true
+      nepian.exp.set.*: true
+      nepian.exp.reset.*: true
+
   nepian.exp.config.*:
     children:
       nepian.exp.config: true
       nepian.exp.config.reload: true
 
-  nepian.exp.op:
-    default: op
+  nepian.exp.info.*:
     children:
-      nepian.exp.public: true
+      nepian.exp.info: true
       nepian.exp.info.player: true
-      nepian.exp.reload: true
+
+  nepian.exp.add.*:
+    children:
       nepian.exp.add: true
       nepian.exp.add.player: true
+
+  nepian.exp.set.*:
+    children:
       nepian.exp.set: true
       nepian.exp.set.player: true
+
+  nepian.exp.reset.*:
+    children:
       nepian.exp.reset: true
-      nepian.exp.config.*: true
+      nepian.exp.reset.player: true
