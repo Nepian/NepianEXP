@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>nepian.bukkit.plugin.exp</groupId>
     <artifactId>NepianEXP</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.2</version>
     <packaging>jar</packaging>
     <name>NepianEXP</name>
     <dependencies>
@@ -38,7 +38,7 @@
         </repository>
     </repositories>
     <build>
-        <finalName>${project.name}</finalName>
+        <finalName>${project.name}-v${project.version}</finalName>
         <defaultGoal>clean package install</defaultGoal>
         <plugins>
             <plugin>
