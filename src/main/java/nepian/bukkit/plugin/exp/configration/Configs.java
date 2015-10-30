@@ -7,14 +7,19 @@ import nepian.bukkit.plugin.exp.Main;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public enum Configs {
-	EXP_BUY_RATE,
-	EXP_SELL_RATE,
-	COLOR_LOGS,
-	DEBUG_MODE,
-	LANGUAGE_FILE;
+	EXP_BUY_RATE(1.0),
+	EXP_SELL_RATE(1.0),
+	COLOR_LOGS(true),
+	DEBUG_MODE(false),
+	LANGUAGE_FILE("lang-jp.yml");
 
 	private static Main plugin = Main.getInstance();
 	private static FileConfiguration config = plugin.getConfig();
+	private Object def;
+
+	private Configs(Object def) {
+		this.def = def;
+	}
 
 	public static void reload() {
 		plugin.reloadConfig();
@@ -30,19 +35,19 @@ public enum Configs {
 	}
 
 	public int getInt() {
-		return config.getInt(getKey());
+		return config.getInt(getKey(), (int) def);
 	}
 
 	public double getDouble() {
-		return config.getDouble(getKey());
+		return config.getDouble(getKey(), (double) def);
 	}
 
 	public String getString() {
-		return config.getString(getKey());
+		return config.getString(getKey(), (String) def);
 	}
 
 	public boolean getBoolean() {
-		return config.getBoolean(getKey());
+		return config.getBoolean(getKey(), (boolean) def);
 	}
 
 	public static ArrayList<String> getAllParam() {
