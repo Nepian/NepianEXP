@@ -25,6 +25,11 @@ import org.bukkit.entity.Player;
  *
  */
 public class Exp implements CommandExecutor {
+	private static final String name = "";
+	private static final String usage = "";
+	private static final String permission = "nepian.exp";
+	private static final String description = "プラグインのメインコマンド";
+
 	private final Main plugin;
 	private ArrayList<ExpCommand> commands;
 
@@ -46,18 +51,8 @@ public class Exp implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args) {
-		if (!(sender instanceof Player)) {
-			String msg = Lang.ERROR_PLAYER_COMMAND.get();
-			plugin.sendMessage(sender, msg);
-			return true;
-		}
-
-		if (!sender.hasPermission("nepian.exp")) {
-			String msg = Lang.ERROR_COMMAND_NO_PERMISSION.get()
-						.replace("{command}", "/" + label);
-			plugin.sendMessage(sender, msg);
-			return true;
-		}
+		if (!this.checkPlayer(sender)) return true;
+		if (!this.checkPermission(sender, permission, label, usage)) return true;
 
 		if (args.length >= 1) {
 			String expCommand = args[0];
@@ -69,10 +64,10 @@ public class Exp implements CommandExecutor {
 			}
 		}
 
-		String msg = Lang.EXP_VERSION.get()
+		plugin.sendMessage(sender, Lang.EXP_VERSION.get()
 				.replace("{name}", plugin.getName())
-				.replace("{version}", plugin.getDescription().getVersion());
-		plugin.sendMessage(sender, msg);
+				.replace("{version}", plugin.getDescription().getVersion()));
+		plugin.sendMessage(sender, Lang.EXP_MESSAGE.get());
 
 		return true;
 	}
@@ -100,6 +95,12 @@ public class Exp implements CommandExecutor {
 				.replace("{label}", label)
 				.replace("{usage}", usage));
 
+		return false;
+	}
+
+	public boolean checkPlayer(CommandSender sender) {
+		if (sender instanceof Player) return true;
+		plugin.sendMessage(sender, Lang.ERROR_PLAYER_COMMAND.get());
 		return false;
 	}
 }

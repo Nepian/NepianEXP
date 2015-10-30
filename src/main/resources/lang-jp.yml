@@ -44,6 +44,7 @@ exp-config-reload-log: "&bコンフィグがリロードされました&r"
 exp-reload: "&dプラグインをリロードしました&r"
 
 # Exp
+exp-message: "使用可能なコマンドは &6/exp help&r で確認できます"
 exp-version: "&d{name} v{version}.&r"
 
 # エラーメッセージ

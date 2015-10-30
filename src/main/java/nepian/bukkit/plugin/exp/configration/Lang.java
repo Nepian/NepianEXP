@@ -48,6 +48,8 @@ public enum Lang {
 	EXP_CONFIG_RELOAD_LOG,
 
 	EXP_RELOAD,
+
+	EXP_MESSAGE,
 	EXP_VERSION;
 
 	private final static Main plugin = Main.getInstance();
