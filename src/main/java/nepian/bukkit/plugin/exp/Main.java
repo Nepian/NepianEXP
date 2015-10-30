@@ -30,8 +30,6 @@ public class Main extends JavaPlugin {
 
 		if (!setupEconomy()) {
 			Logger.log("&4VaultˆË‘¶ŠÖŒWƒvƒ‰ƒOƒCƒ“‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
-			//getServer().getPluginManager().disablePlugin(this);
-			//return;
 		}
 
 		playerMan = new PlayerManager(this);
