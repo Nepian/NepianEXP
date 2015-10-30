@@ -17,6 +17,7 @@ permissions:
       nepian.exp.info: true
       nepian.exp.buy: true
       nepian.exp.sell: true
+      nepian.exp.send: true
 
   nepian.exp.config.*:
     children:

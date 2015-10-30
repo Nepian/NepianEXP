@@ -31,6 +31,9 @@ public enum Lang {
 
 	EXP_SELL,
 
+	EXP_SEND_SENDER,
+	EXP_SEND_TARGET,
+
 	EXP_ADD,
 	EXP_ADD_TARGET,
 
