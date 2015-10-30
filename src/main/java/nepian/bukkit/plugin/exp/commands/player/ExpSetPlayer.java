@@ -47,8 +47,14 @@ public class ExpSetPlayer extends ExpCommand {
 				return true;
 			}
 
+			Integer playerOldLevel = ExpManager.getLevel(player);
+			Integer playerOldExp = ExpManager.getTotalExp(player);
+
 			ExpManager.resetExp(player);
 			ExpManager.addExp(player, amount);
+
+			Integer playerNewLevel = ExpManager.getLevel(player);
+			Integer playerNewExp = ExpManager.getTotalExp(player);
 
 			plugin.sendMessage(sender, Lang.EXP_SET_SENDER.get()
 					.replace("{player}", player.getName())
@@ -56,6 +62,11 @@ public class ExpSetPlayer extends ExpCommand {
 			plugin.sendMessage(player, Lang.EXP_SET_TARGET.get()
 					.replace("{player}", sender.getName())
 					.replace("{amount}", amount.toString()));
+			plugin.sendMessage(player, Lang.EXP_CHANGE.get()
+					.replace("{oldExp}", playerOldExp.toString())
+					.replace("{oldLevel}", playerOldLevel.toString())
+					.replace("{newExp}", playerNewExp.toString())
+					.replace("{newLevel}", playerNewLevel.toString()));
 		}
 
 		return true;

@@ -33,12 +33,23 @@ public class ExpResetPlayer extends ExpCommand {
 				continue;
 			}
 
+			Integer playerOldLevel = ExpManager.getLevel(player);
+			Integer playerOldExp = ExpManager.getTotalExp(player);
+
 			ExpManager.resetExp(player);
+
+			Integer playerNewLevel = ExpManager.getLevel(player);
+			Integer playerNewExp = ExpManager.getTotalExp(player);
 
 			plugin.sendMessage(sender, Lang.EXP_RESET_SENDER_MESSAGE.get()
 					.replace("{target}", player.getName()));
 			plugin.sendMessage(player, Lang.EXP_RESET_TARGET_MESSAGE.get()
 					.replace("{sender}", sender.getName()));
+			plugin.sendMessage(player, Lang.EXP_CHANGE.get()
+					.replace("{oldExp}", playerOldExp.toString())
+					.replace("{oldLevel}", playerOldLevel.toString())
+					.replace("{newExp}", playerNewExp.toString())
+					.replace("{newLevel}", playerNewLevel.toString()));
 		}
 
 		return true;
