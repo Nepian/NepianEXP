@@ -25,10 +25,8 @@ import org.bukkit.entity.Player;
  *
  */
 public class Exp implements CommandExecutor {
-	private static final String name = "";
 	private static final String usage = "";
 	private static final String permission = "nepian.exp";
-	private static final String description = "プラグインのメインコマンド";
 
 	private final Main plugin;
 	private ArrayList<ExpCommand> commands;
