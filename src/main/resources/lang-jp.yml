@@ -23,6 +23,10 @@ exp-sell: "経験値を &d&l{amount}&r 売却しました"
 exp-add: "経験値を &6{player}&r に &d&l{amount}&r 追加しました"
 exp-add-target: "&6{player}&r によって経験値が &d&l{amount}&r 追加されました"
 
+# Set
+exp-set-sender: "&6{player}&r の経験値を &d&l{amount}&r に設定しました"
+exp-set-target: "&6{player}&r によって経験値が &d&l{amount}&r に設定されました"
+
 # Reset
 exp-reset-target-message: "&6{sender}&b によって経験値がリセットされました&r"
 exp-reset-sender-message: "&6{target}&b の経験値をリセットしました&r"

@@ -31,5 +31,7 @@ permissions:
       nepian.exp.reload: true
       nepian.exp.add: true
       nepian.exp.add.player: true
+      nepian.exp.set: true
+      nepian.exp.set.player: true
       nepian.exp.reset: true
       nepian.exp.config.*: true

@@ -10,6 +10,7 @@ import nepian.bukkit.plugin.exp.commands.ExpInfo;
 import nepian.bukkit.plugin.exp.commands.ExpReload;
 import nepian.bukkit.plugin.exp.commands.ExpReset;
 import nepian.bukkit.plugin.exp.commands.ExpSell;
+import nepian.bukkit.plugin.exp.commands.ExpSet;
 import nepian.bukkit.plugin.exp.configration.Lang;
 
 import org.bukkit.command.Command;
@@ -34,6 +35,7 @@ public class Exp implements CommandExecutor {
 		this.commands.add(new ExpBuy(plugin));
 		this.commands.add(new ExpSell(plugin));
 		this.commands.add(new ExpAdd(plugin));
+		this.commands.add(new ExpSet(plugin));
 		this.commands.add(new ExpReset(plugin));
 		this.commands.add(new ExpReload(plugin));
 		this.commands.add(new ExpConfig(plugin));
