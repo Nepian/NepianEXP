@@ -1,5 +1,7 @@
 package nepian.bukkit.plugin.exp;
 
+import java.io.IOException;
+
 import nepian.bukkit.plugin.exp.commands.player.PlayerManager;
 import nepian.bukkit.plugin.exp.configration.Logger;
 import net.milkbowl.vault.economy.Economy;
@@ -8,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.Metrics;
 
 public class Main extends JavaPlugin {
 	private static Main instance;
@@ -33,6 +36,13 @@ public class Main extends JavaPlugin {
 
 		playerMan = new PlayerManager(this);
 		getCommand("exp").setExecutor(exp = new Exp(this));
+
+		try {
+			Metrics metrics = new Metrics(this);
+			metrics.start();
+		} catch (IOException e) {
+			Logger.log("&4Failed to start Metrics: &e" + e.getMessage());
+		}
 
 		Logger.log("&d" + getName() + " v" + getDescription().getVersion() + " enabled!");
 	}
