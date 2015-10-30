@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 public class ExpResetPlayer extends ExpCommand {
 	private static final String name = "";
-	private static final String usage = "reset player [player]...";
+	private static final String usage = "reset <player> [player]...";
 	private static final String permission = "nepian.exp.reset.player";
 	private static final String description = "指定プレイヤーの経験値をリセット";
 

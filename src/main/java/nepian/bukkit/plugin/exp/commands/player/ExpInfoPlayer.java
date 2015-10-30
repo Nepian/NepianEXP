@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 public class ExpInfoPlayer extends ExpCommand {
 	private static final String name = "";
-	private static final String usage = "info player [player]...";
+	private static final String usage = "info <player> [player]...";
 	private static final String permission = "nepian.exp.info.player";
 	private static final String description = "指定プレイヤーの経験値を表示";
 
