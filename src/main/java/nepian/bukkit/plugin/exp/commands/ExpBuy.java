@@ -3,6 +3,7 @@ package nepian.bukkit.plugin.exp.commands;
 import nepian.bukkit.plugin.exp.ExpCommand;
 import nepian.bukkit.plugin.exp.ExpManager;
 import nepian.bukkit.plugin.exp.Main;
+import nepian.bukkit.plugin.exp.configration.CommandData;
 import nepian.bukkit.plugin.exp.configration.Configs;
 import nepian.bukkit.plugin.exp.configration.Lang;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -11,23 +12,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ExpBuy extends ExpCommand {
-	private static final String name = "buy";
-	private static final String usage = "buy { <exp> or <level>L }";
-	private static final String permission = "nepian.exp.buy";
-	private static final String description = "åoå±ílÇçwì¸Ç∑ÇÈ";
 
-	private final Main plugin;
-
-	public ExpBuy(Main instance) {
-		super(name, usage, permission, description);
-		this.plugin = instance;
+	public ExpBuy() {
+		super(CommandData.BUY);
 	}
 
 	@Override
 	public boolean useCommand(CommandSender sender, String label, String[] args) {
-		if (!plugin.getExp().checkPermission(sender, permission, label, usage)) return true;
-		if (!plugin.getExp().checkEqualArgsLength(2, args, sender, label, usage)) return true;
+		if (!super.checkPermission(sender, label)) return false;
+		if (!super.checkEqualLength(2, sender, label, args)) return false;
 
+		Main plugin = Main.getInstance();
 		Player player = (Player) sender;
 		Integer buyAmount = 0;
 
@@ -65,13 +60,13 @@ public class ExpBuy extends ExpCommand {
 			return true;
 		}
 
-		Integer oldLevel = ExpManager.getLevel(player);
 		Integer oldExp = ExpManager.getTotalExp(player);
+		Integer oldLevel = ExpManager.getLevel(player);
 
 		ExpManager.addExp(player, buyAmount);
 
-		Integer newLevel = ExpManager.getLevel(player);
 		Integer newExp = ExpManager.getTotalExp(player);
+		Integer newLevel = ExpManager.getLevel(player);
 
 		plugin.sendMessage(sender, Lang.EXP_BUY.get()
 				.replace("{amount}", buyAmount.toString()));

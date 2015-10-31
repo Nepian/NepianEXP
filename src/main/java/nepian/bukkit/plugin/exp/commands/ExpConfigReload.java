@@ -2,6 +2,7 @@ package nepian.bukkit.plugin.exp.commands;
 
 import nepian.bukkit.plugin.exp.ExpCommand;
 import nepian.bukkit.plugin.exp.Main;
+import nepian.bukkit.plugin.exp.configration.CommandData;
 import nepian.bukkit.plugin.exp.configration.Configs;
 import nepian.bukkit.plugin.exp.configration.Lang;
 import nepian.bukkit.plugin.exp.configration.Logger;
@@ -9,24 +10,18 @@ import nepian.bukkit.plugin.exp.configration.Logger;
 import org.bukkit.command.CommandSender;
 
 public class ExpConfigReload extends ExpCommand {
-	private static final String name = "reload";
-	private static final String usage = "config reload";
-	private static final String permission = "nepian.exp.config.reload";
-	private static final String description = "config.ymlÇçƒì«Ç›çûÇ›";
 
-	private final Main plugin;
-
-	public ExpConfigReload(Main instance) {
-		super(name, usage, permission, description);
-		this.plugin = instance;
+	public ExpConfigReload() {
+		super(CommandData.CONFIG_RELOAD);
 	}
+
 	@Override
 	public boolean useCommand(CommandSender sender, String label, String[] args) {
-		if (!plugin.getExp().checkPermission(sender, permission, label, usage)) return true;
-		if (!plugin.getExp().checkEqualArgsLength(2, args, sender, label, usage)) return true;
+		if (!super.checkPermission(sender, label)) return false;
+		if (!super.checkEqualLength(2, sender, label, args)) return false;
 
 		Configs.reload();
-		plugin.sendMessage(sender, Lang.EXP_CONFIG_RELOAD_MESSAGE.get());
+		Main.getInstance().sendMessage(sender, Lang.EXP_CONFIG_RELOAD_MESSAGE.get());
 		Logger.log(Lang.EXP_CONFIG_RELOAD_LOG.get());
 
 		return true;

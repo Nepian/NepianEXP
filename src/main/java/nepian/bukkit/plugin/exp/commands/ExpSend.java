@@ -3,30 +3,26 @@ package nepian.bukkit.plugin.exp.commands;
 import nepian.bukkit.plugin.exp.ExpCommand;
 import nepian.bukkit.plugin.exp.ExpManager;
 import nepian.bukkit.plugin.exp.Main;
+import nepian.bukkit.plugin.exp.configration.CommandData;
 import nepian.bukkit.plugin.exp.configration.Lang;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ExpSend extends ExpCommand {
-	private static final String name = "send";
-	private static final String usage = "send { <exp> or <level>L } <player>";
-	private static final String permission = "nepian.exp.send";
-	private static final String description = "指定プレイヤーに経験値を送信する";
 
-	private final Main plugin;
-
-	public ExpSend(Main instance) {
-		super(name, usage, permission, description);
-		this.plugin = instance;
+	public ExpSend() {
+		super(CommandData.SEND);
 	}
 
 	@Override
 	public boolean useCommand(CommandSender sender, String label, String[] args) {
-		if (!plugin.getExp().checkPermission(sender, permission, label, usage)) return true;
-		if (!plugin.getExp().checkEqualArgsLength(3, args, sender, label, usage)) return true;
+		if (!super.checkPermission(sender, label)) return true;
+		if (!super.checkEqualLength(3, sender, label, args)) return false;
 
+		Main plugin = Main.getInstance();
 		Player player = plugin.getPlayerMan().getPlayer(args[2]);
+
 		if (player == null) {
 			plugin.sendMessage(sender, Lang.ERROR_NOT_ONLINE_PLAYER.get()
 					.replace("{player}", args[2]));
@@ -45,7 +41,7 @@ public class ExpSend extends ExpCommand {
 			}
 		} catch (Exception e) {
 			plugin.sendMessage(sender, Lang.ERROR_NOT_VALID_NUMBER.get());
-			return true;
+			return false;
 		}
 
 		if (amount <= 0) {

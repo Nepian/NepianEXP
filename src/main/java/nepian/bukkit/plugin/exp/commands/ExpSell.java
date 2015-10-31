@@ -3,6 +3,7 @@ package nepian.bukkit.plugin.exp.commands;
 import nepian.bukkit.plugin.exp.ExpCommand;
 import nepian.bukkit.plugin.exp.ExpManager;
 import nepian.bukkit.plugin.exp.Main;
+import nepian.bukkit.plugin.exp.configration.CommandData;
 import nepian.bukkit.plugin.exp.configration.Configs;
 import nepian.bukkit.plugin.exp.configration.Lang;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -11,23 +12,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ExpSell extends ExpCommand {
-	private static final String name = "sell";
-	private static final String usage = "sell { <exp> or <level>L }";
-	private static final String permission = "nepian.exp.sell";
-	private static final String description = "ŒoŒ±’l‚ð”„‹p‚·‚é";
 
-	private final Main plugin;
-
-	public ExpSell(Main instance) {
-		super(name, usage, permission, description);
-		this.plugin = instance;
+	public ExpSell() {
+		super(CommandData.SELL);
 	}
 
 	@Override
 	public boolean useCommand(CommandSender sender, String label, String[] args) {
-		if (!plugin.getExp().checkPermission(sender, permission, label, usage)) return true;
-		if (!plugin.getExp().checkEqualArgsLength(2, args, sender, label, usage)) return true;
+		if (!super.checkPermission(sender, label)) return false;
+		if (!super.checkEqualLength(2, sender, label, args)) return false;
 
+		Main plugin = Main.getInstance();
 		Player player = (Player) sender;
 		Integer sellAmount = 0;
 
@@ -41,7 +36,7 @@ public class ExpSell extends ExpCommand {
 				sellAmount = Integer.valueOf(args[1]);
 			} catch (NumberFormatException e) {
 				plugin.sendMessage(sender, Lang.ERROR_NOT_VALID_NUMBER.get());
-				return true;
+				return false;
 			}
 		}
 
@@ -64,13 +59,13 @@ public class ExpSell extends ExpCommand {
 			return true;
 		}
 
-		Integer oldLevel = ExpManager.getLevel(player);
 		Integer oldExp = ExpManager.getTotalExp(player);
+		Integer oldLevel = ExpManager.getLevel(player);
 
 		ExpManager.addExp(player, -sellAmount);
 
-		Integer newLevel = ExpManager.getLevel(player);
 		Integer newExp = ExpManager.getTotalExp(player);
+		Integer newLevel = ExpManager.getLevel(player);
 
 		plugin.sendMessage(sender, Lang.EXP_SELL.get()
 				.replace("{amount}", sellAmount.toString()));

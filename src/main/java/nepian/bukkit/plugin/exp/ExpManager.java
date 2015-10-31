@@ -47,15 +47,14 @@ public class ExpManager {
 
 	/**
 	 * レベルを経験値に変換する
-	 * @param level 経験値に変換するレベル
+	 * @param lvl 経験値に変換するレベル
 	 * @return 変換後の経験値
 	 */
-	public static int convertLevelToExp(int level) {
-		int exp =
-				(level >= 30) ? (int)(3.5 * level * level - 151.5 * level + 2220) :
-					(level >= 16) ? (int)(1.5 * level * level - 29.5 * level + 360) :
-						17 * level;
-		return exp;
+	public static int convertLevelToExp(int lvl) {
+		double level = lvl;
+		return (level >= 30) ? (int)(3.5 * level * level - 151.5 * level + 2220) :
+			(level >= 16) ? (int)(1.5 * level * level - 29.5 * level + 360) :
+				17 * (int) level;
 	}
 
 	/**

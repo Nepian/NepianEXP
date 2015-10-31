@@ -46,6 +46,9 @@ public enum Lang {
 	EXP_CONFIG_KEY_AND_VALUE("&c{key}&r : &e{value}&r"),
 	EXP_CONFIG_RELOAD_MESSAGE("&bコンフィグをリロードしました&r"),
 	EXP_CONFIG_RELOAD_LOG("&bコンフィグがリロードされました&r"),
+	EXP_CONFIG_SET_NOT_KEY("&c[エラー] &e{key}&c が存在しません&r"),
+	EXP_CONFIG_SET_CHANGE("&c{key}&r : &e{oldValue}&r ⇒ &e{newValue}&r"),
+	EXP_CONFIG_SET_END("&cリロードコマンド実行後にデータが反映されます&r"),
 
 	EXP_RELOAD("&dプラグインをリロードしました&r"),
 

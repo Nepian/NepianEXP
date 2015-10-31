@@ -3,27 +3,23 @@ package nepian.bukkit.plugin.exp.commands.player;
 import nepian.bukkit.plugin.exp.ExpCommand;
 import nepian.bukkit.plugin.exp.ExpManager;
 import nepian.bukkit.plugin.exp.Main;
+import nepian.bukkit.plugin.exp.configration.CommandData;
 import nepian.bukkit.plugin.exp.configration.Lang;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ExpInfoPlayer extends ExpCommand {
-	private static final String name = "";
-	private static final String usage = "info <player> [player]...";
-	private static final String permission = "nepian.exp.info.player";
-	private static final String description = "指定プレイヤーの経験値を表示";
 
-	private final Main plugin;
-
-	public ExpInfoPlayer(Main instance) {
-		super(name, usage, permission, description);
-		this.plugin = instance;
+	public ExpInfoPlayer() {
+		super(CommandData.INFO_PLAYER);
 	}
 
 	@Override
 	public boolean useCommand(CommandSender sender, String label, String[] args) {
-		if (!plugin.getExp().checkPermission(sender, permission, label, usage)) return true;
+		if (!super.checkPermission(sender, label)) return false;
+
+		Main plugin = Main.getInstance();
 
 		for (int i = 1; i < args.length; i++) {
 			Player player = plugin.getPlayerMan().getPlayer(args[i]);

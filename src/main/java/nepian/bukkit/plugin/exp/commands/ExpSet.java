@@ -4,34 +4,30 @@ import nepian.bukkit.plugin.exp.ExpCommand;
 import nepian.bukkit.plugin.exp.ExpManager;
 import nepian.bukkit.plugin.exp.Main;
 import nepian.bukkit.plugin.exp.commands.player.ExpSetPlayer;
+import nepian.bukkit.plugin.exp.configration.CommandData;
 import nepian.bukkit.plugin.exp.configration.Lang;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ExpSet extends ExpCommand {
-	private static final String name = "set";
-	private static final String usage = "set { <exp> or <Level>L } [player]...";
-	private static final String permission = "nepian.exp.set";
-	private static final String description = "ŒoŒ±’l‚ðÝ’è‚·‚é";
 
-	private final Main plugin;
-
-	public ExpSet(Main instance) {
-		super(name, usage, permission, description);
-		this.plugin = instance;
+	public ExpSet() {
+		super(CommandData.SET);
 	}
 
 	@Override
 	public boolean useCommand(CommandSender sender, String label, String[] args) {
-		if (!plugin.getExp().checkPermission(sender, permission, label, usage)) return true;
+		if (!super.checkPermission(sender, label)) return false;
+
+		Main plugin = Main.getInstance();
 
 		if (args.length > 2) {
 			new ExpSetPlayer(plugin).useCommand(sender, label, args);
-			return true;
+			return false;
 		}
 
-		if (!plugin.getExp().checkEqualArgsLength(2, args, sender, label, usage)) return true;
+		if (!super.checkEqualLength(2, sender, label, args)) return false;
 
 		Player player = (Player) sender;
 
@@ -46,7 +42,7 @@ public class ExpSet extends ExpCommand {
 			}
 		} catch (Exception e) {
 			plugin.sendMessage(sender, Lang.ERROR_NOT_VALID_NUMBER.get());
-			return true;
+			return false;
 		}
 
 		if (amount <= 0) {
@@ -54,14 +50,14 @@ public class ExpSet extends ExpCommand {
 			return true;
 		}
 
-		Integer playerOldLevel = ExpManager.getLevel(player);
 		Integer playerOldExp = ExpManager.getTotalExp(player);
+		Integer playerOldLevel = ExpManager.getLevel(player);
 
 		ExpManager.resetExp(player);
 		ExpManager.addExp(player, amount);
 
-		Integer playerNewLevel = ExpManager.getLevel(player);
 		Integer playerNewExp = ExpManager.getTotalExp(player);
+		Integer playerNewLevel = ExpManager.getLevel(player);
 
 		plugin.sendMessage(sender, Lang.EXP_SET_SENDER.get()
 				.replace("{player}", player.getName())

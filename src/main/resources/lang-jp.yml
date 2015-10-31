@@ -39,6 +39,9 @@ exp-reset-sender-message: "&6{target}&b の経験値をリセットしました&r"
 exp-config-key-and-value: "&c{key}&r : &e{value}&r"
 exp-config-reload-message: "&bコンフィグをリロードしました&r"
 exp-config-reload-log: "&bコンフィグがリロードされました&r"
+exp-config-set-not-key: "&c[エラー] &e{key}&c が存在しません&r"
+exp-config-se-change: "&c{key}&r : &e{oldValue}&r ⇒ &e{newValue}&r"
+exp-config-set-end: "&cリロードコマンド実行後にデータが反映されます&r"
 
 # Reload
 exp-reload: "&dプラグインをリロードしました&r"

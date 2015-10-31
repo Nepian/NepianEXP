@@ -3,28 +3,23 @@ package nepian.bukkit.plugin.exp.commands.player;
 import nepian.bukkit.plugin.exp.ExpCommand;
 import nepian.bukkit.plugin.exp.ExpManager;
 import nepian.bukkit.plugin.exp.Main;
+import nepian.bukkit.plugin.exp.configration.CommandData;
 import nepian.bukkit.plugin.exp.configration.Lang;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ExpSetPlayer extends ExpCommand {
-	private static final String name = "";
-	private static final String usage = "set { <exp> or <level>L } <player> [player]...";
-	private static final String permission = "nepian.exp.set.player";
-	private static final String description = "指定プレイヤーの経験値を設定する";
-
-	private final Main plugin;
 
 	public ExpSetPlayer(Main instance) {
-		super(name, usage, permission, description);
-		this.plugin = instance;
+		super(CommandData.SET_PLAYER);
 	}
 
 	@Override
 	public boolean useCommand(CommandSender sender, String label, String[] args) {
-		if (!plugin.getExp().checkPermission(sender, permission, label, usage)) return true;
+		if (!super.checkPermission(sender, label)) return false;
 
+		Main plugin = Main.getInstance();
 		for (int i = 2; i < args.length; i++) {
 			Player player = plugin.getPlayerMan().getPlayer(args[i]);
 			if (player == null) {
@@ -44,7 +39,7 @@ public class ExpSetPlayer extends ExpCommand {
 				}
 			} catch (Exception e) {
 				plugin.sendMessage(sender, Lang.ERROR_NOT_VALID_NUMBER.get());
-				return true;
+				return false;
 			}
 
 			Integer playerOldLevel = ExpManager.getLevel(player);

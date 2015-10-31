@@ -25,40 +25,45 @@ import org.bukkit.entity.Player;
  *
  */
 public class Exp implements CommandExecutor {
-	private static final String usage = "";
-	private static final String permission = "nepian.exp";
-
 	private final Main plugin;
 	private ArrayList<ExpCommand> commands;
 
 	public Exp(Main instance) {
 		this.plugin = instance;
 		this.commands = new ArrayList<ExpCommand>();
-		this.commands.add(new ExpHelp(plugin));
-		this.commands.add(new ExpInfo(plugin));
-		this.commands.add(new ExpSend(plugin));
-		this.commands.add(new ExpAdd(plugin));
-		this.commands.add(new ExpSet(plugin));
-		this.commands.add(new ExpReset(plugin));
-		this.commands.add(new ExpReload(plugin));
-		this.commands.add(new ExpConfig(plugin));
+		this.commands.add(new ExpHelp());
+		this.commands.add(new ExpInfo());
+		this.commands.add(new ExpSend());
+		this.commands.add(new ExpAdd());
+		this.commands.add(new ExpSet());
+		this.commands.add(new ExpReset());
+		this.commands.add(new ExpReload());
+		this.commands.add(new ExpConfig());
 		if (plugin.getEconomy() != null) {
-			this.commands.add(new ExpBuy(plugin));
-			this.commands.add(new ExpSell(plugin));
+			this.commands.add(new ExpBuy());
+			this.commands.add(new ExpSell());
 		}
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command,
-			String label, String[] args) {
-		if (!this.checkPlayer(sender)) return true;
-		if (!this.checkPermission(sender, permission, label, usage)) return true;
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if (!(sender instanceof Player)) {
+			plugin.sendMessage(sender, Lang.ERROR_PLAYER_COMMAND.get());
+			return true;
+		}
+
+		if (!sender.hasPermission("nepian.exp")) {
+			plugin.sendMessage(sender, Lang.ERROR_COMMAND_NO_PERMISSION.get()
+					.replace("{label}", label)
+					.replace("{usage}", ""));
+			return true;
+		}
 
 		if (args.length >= 1) {
 			String expCommand = args[0];
-			for (ExpCommand eCommand : commands) {
-				if (expCommand.equalsIgnoreCase(eCommand.getName())) {
-					eCommand.useCommand(sender, label, args);
+			for (ExpCommand command : commands) {
+				if (expCommand.equalsIgnoreCase(command.getName())) {
+					command.useCommand(sender, label, args);
 					return true;
 				}
 			}
@@ -76,31 +81,7 @@ public class Exp implements CommandExecutor {
 		return commands;
 	}
 
-	public boolean checkPermission(CommandSender player,
-			String permission, String label, String usage) {
-		if (player.hasPermission(permission)) return true;
-
-		plugin.sendMessage(player, Lang.ERROR_COMMAND_NO_PERMISSION.get()
-				.replace("{label}", label)
-				.replace("{usage}", usage));
-
-		return false;
-	}
-
-	public boolean checkEqualArgsLength(int length, String[] args,
-			CommandSender sender, String label, String usage) {
-		if (args.length == length) return true;
-		plugin.sendMessage(sender, Lang.ERROR_COMMAND.get());
-		plugin.sendMessage(sender, Lang.ERROR_COMMAND_USAGE.get()
-				.replace("{label}", label)
-				.replace("{usage}", usage));
-
-		return false;
-	}
-
-	public boolean checkPlayer(CommandSender sender) {
-		if (sender instanceof Player) return true;
-		plugin.sendMessage(sender, Lang.ERROR_PLAYER_COMMAND.get());
-		return false;
+	public Main getPlugin() {
+		return plugin;
 	}
 }

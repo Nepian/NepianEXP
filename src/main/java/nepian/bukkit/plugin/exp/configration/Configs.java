@@ -11,11 +11,12 @@ public enum Configs {
 	EXP_SELL_RATE(1.0),
 	COLOR_LOGS(true),
 	DEBUG_MODE(false),
-	LANGUAGE_FILE("lang-jp.yml");
+	LANGUAGE_FILE("lang-jp.yml"),
+	EXP_CMD_DESCRIPTIONS("exp-cmd-decriptions.yml");
 
 	private static Main plugin = Main.getInstance();
 	private static FileConfiguration config = plugin.getConfig();
-	private Object def;
+	private final Object def;
 
 	private Configs(Object def) {
 		this.def = def;
@@ -30,33 +31,41 @@ public enum Configs {
 		return name().toLowerCase().replace("_", "-");
 	}
 
-	public static void set(String key, Object value) {
-		config.set(key, value);
+	public void set(String value) {
+		config.set(getKey(), value);
 	}
 
-	public int getInt() {
-		return config.getInt(getKey(), (int) def);
-	}
-
-	public double getDouble() {
-		return config.getDouble(getKey(), (double) def);
+	private String getString(Object def) {
+		return config.getString(getKey(), String.valueOf(def));
 	}
 
 	public String getString() {
-		return config.getString(getKey(), (String) def);
+		return getString(def);
 	}
 
 	public boolean getBoolean() {
-		return config.getBoolean(getKey(), (boolean) def);
+		try {
+			return Boolean.valueOf(getString(def));
+		} catch (Exception e) {
+			return (boolean) def;
+		}
+	}
+
+	public double getDouble() {
+		try {
+			return Double.valueOf(getString(def));
+		} catch (Exception e) {
+			return (double) def;
+		}
 	}
 
 	public static ArrayList<String> getAllParam() {
 		ArrayList<String> params = new ArrayList<String>();
-		for (Configs value : values()) {
-			String key = value.getKey();
+		for (Configs config : values()) {
+			String key = config.getKey();
 			params.add(Lang.EXP_CONFIG_KEY_AND_VALUE.get()
 					.replace("{key}", key)
-					.replace("{value}", value.getString()));
+					.replace("{value}", config.getString()));
 		}
 		return params;
 	}

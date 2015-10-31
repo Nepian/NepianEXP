@@ -4,30 +4,26 @@ import nepian.bukkit.plugin.exp.ExpCommand;
 import nepian.bukkit.plugin.exp.ExpManager;
 import nepian.bukkit.plugin.exp.Main;
 import nepian.bukkit.plugin.exp.commands.player.ExpInfoPlayer;
+import nepian.bukkit.plugin.exp.configration.CommandData;
 import nepian.bukkit.plugin.exp.configration.Lang;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ExpInfo extends ExpCommand {
-	private static final String name = "info";
-	private static final String usage = "info [player]...";
-	private static final String permission = "nepian.exp.info";
-	private static final String description = "ŒoŒ±’l‚Ìî•ñ‚ð•\Ž¦‚·‚é";
 
-	private final Main plugin;
-
-	public ExpInfo(Main instance) {
-		super(name, usage, permission, description);
-		this.plugin = instance;
+	public ExpInfo() {
+		super(CommandData.INFO);
 	}
 
 	@Override
 	public boolean useCommand(CommandSender sender, String label, String[] args) {
-		if (!plugin.getExp().checkPermission(sender, permission, label, usage)) return true;
+		if (!super.checkPermission(sender, label)) return false;
+
+		Main plugin = Main.getInstance();
 
 		if (args.length > 1) {
-			new ExpInfoPlayer(plugin).useCommand(sender, label, args);
+			new ExpInfoPlayer().useCommand(sender, label, args);
 			return true;
 		}
 
