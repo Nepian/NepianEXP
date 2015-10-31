@@ -35,6 +35,7 @@ permissions:
     children:
       nepian.exp.config: true
       nepian.exp.config.reload: true
+      nepian.exp.config.set: true
 
   nepian.exp.info.*:
     children:
