@@ -25,7 +25,6 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 
-		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
 
 		if (!setupEconomy()) {

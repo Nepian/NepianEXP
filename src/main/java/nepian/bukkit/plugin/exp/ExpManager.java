@@ -98,7 +98,9 @@ public class ExpManager {
 	 * @return 対象プレイヤーの経験値の総量
 	 */
 	public static int getTotalExp(Player player) {
-		return player.getTotalExperience();
+		int xp = ExpManager.getLevel(player);
+		int need = ExpManager.getExpNeededToLevelUp(xp);
+		return convertLevelToExp(xp) + Math.round(need * getExp(player));
 	}
 
 	/**
