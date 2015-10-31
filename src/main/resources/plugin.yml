@@ -1,11 +1,13 @@
 name: NepianEXP
 main: nepian.bukkit.plugin.exp.Main
-version: 1.2.2
+version: 1.3.3
 author: Nepian
 depend:
 - Vault
 commands:
   exp:
+    prmission: nepian.exp
+    usage: /<command>
     aliases:
     - nexp
 permissions:
