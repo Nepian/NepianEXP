@@ -1,6 +1,6 @@
 name: NepianEXP
-main: nepian.bukkit.plugin.exp.Main
-version: 1.4.4
+main: com.nepian.nepianexp.NepianEXP
+version: 2.0.5
 author: Nepian
 depend:
 - Vault
